@@ -1,0 +1,80 @@
+@use './theme.scss';
+@use './common.scss' as common;
+
+html, body, #root, .app {
+    @include common.size(100%, 100%); // 전체 화면 사용
+}
+
+.page {
+    display: grid;
+    grid-template-columns: 2fr 6fr 2fr;
+    @include common.size(100%, 100%);
+
+    .colorlog {
+        @include common.size(100%, 100%);
+        grid-column-start: 2;
+	    grid-column-end: 3;
+
+        .title {
+            margin-top: 20px;
+            font-size: 30px;
+            text-align: center;
+        }
+        .displayer {
+            @include common.size(40%, 35%); // 60% 90%
+            margin: 0 auto;     // 가운데 정렬
+            border : solid 2px black;
+            margin-top : 20px;
+            margin-bottom : 20px;
+        }
+        .colorlogSlider{
+            margin: 0 auto;     // 가운데 정렬
+            width : 75%;
+            margin-top : 20px;
+            margin-bottom: 20px;
+        }
+        .memo {
+            width: 100%;
+            text-align: center;
+            label {
+                display: block;
+                margin-top: 40px;
+                margin-bottom: 10px;
+                font-size: 20px;
+            }
+            textarea {
+                width: 75%;
+            }            
+        }
+        .footer {
+            width: 100%;
+            text-align: center;
+            .saveBtn {
+                @include common.size(100px, 45px);
+                margin-top: 20px;
+                margin-bottom: 20px;
+                background-color: theme.$sub-color;
+                border-radius: 10px;
+                border:none;
+            }
+            .activeBtn {
+                &:hover {
+                    @include common.hover-event();
+                    transform: scale(1.15);
+                    color: theme.$dark-gray-color;
+                }
+            }
+            .inactiveBtn {
+                color: theme.$dark-gray-color;
+                background-color: transparentize(theme.$step-color, 0.6);
+            }
+        }
+    }
+}
+
+input[type=range] {
+    width:100%;
+	appearance: none;
+	background: transparent;
+    outline: auto;
+}
