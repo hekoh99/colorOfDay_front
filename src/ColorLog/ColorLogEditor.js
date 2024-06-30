@@ -21,10 +21,6 @@ const ColorLogEditor = () => {
     const [btnStatus, setBtnStatus] = useState("saveBtn inactiveBtn");
 
     useEffect(() => {
-        const requestOption = {
-            "method" : "GET",
-            "headers" : {"Content-Type" : "application/json"},
-        };
 
         httpSend(`/colorLog/detail?date=${day}&year=${year}&month=${month}`, "GET").then((res) => {
             if (Object.keys(res).length !== 0) {
