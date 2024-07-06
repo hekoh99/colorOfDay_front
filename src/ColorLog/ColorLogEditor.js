@@ -1,40 +1,72 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import ColorDisplayer from "./ColorDisplayer";
 import ColorSlider from "./ColorSlider";
 import rangeExtentRatio from "../utils/commonValues";
 import ColorLogMemo from "./ColorLogMemo";
 import { httpSend } from "../utils/apiCall";
+import { Icon } from '@iconify/react';
+import { addDays } from "date-fns";
+import { subDays } from "date-fns/subDays";
 
 const ColorLogEditor = () => {
     const { year, month, day } = useParams();
-    // const [colorLog, setColorLog] = useState({});
+    const navigate = useNavigate();
+    const { state } = useLocation();
 
     const [RValue, setRValue] = useState(130 * rangeExtentRatio);
     const [GValue, setGValue] = useState(130 * rangeExtentRatio);
     const [BValue, setBValue] = useState(130 * rangeExtentRatio);
     const [memo, setMemo] = useState("");
-
     const [id, setId] = useState(-1);
-    const [isDiff, setIsDiff] = useState(false);
 
     const [btnStatus, setBtnStatus] = useState("saveBtn inactiveBtn");
+
+    const moveToPrevDate = () => {
+        const date = subDays(state, 1);
+        navigate(`/${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`, {state : date});
+    }
+
+    const moveToNextDate = () => {
+        const date = addDays(state, 1);
+        navigate(`/${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`, {state : date});
+    }
+
+    const moveToHome = () => {
+        navigate("/", {state : state});
+    }
+    const setDefault = () => {
+        setRValue(130 * rangeExtentRatio);
+        setGValue(130 * rangeExtentRatio);
+        setBValue(130 * rangeExtentRatio);
+        setId(-1);
+        setMemo("");
+    }
 
     useEffect(() => {
 
         httpSend(`/colorLog/detail?date=${day}&year=${year}&month=${month}`, "GET").then((res) => {
-            if (Object.keys(res).length !== 0) {
-                if (res.id !== -1) {
-                    setRValue(res.colorR * rangeExtentRatio);
-                    setGValue(res.colorG * rangeExtentRatio);
-                    setBValue(res.colorB * rangeExtentRatio);
-                    setId(res.id);
+            if (res.error == null) {    // 응답이 에러가 아니면
+                if (res.data.length > 0) {
+                    const colorData = res.data[0];
+                    if (colorData.id !== -1) {
+                        setRValue(colorData.colorR * rangeExtentRatio);
+                        setGValue(colorData.colorG * rangeExtentRatio);
+                        setBValue(colorData.colorB * rangeExtentRatio);
+                        setId(colorData.id);
     
-                    setMemo(res.text);
+                        setMemo(colorData.text);
+                    }
+                    else {
+                        setDefault();
+                    }
+                }
+                else {
+                    setDefault();
                 }
             }
         });
-    }, []);
+    }, [state]);
 
     const onSave = (e) => {
         // 버튼 활성화 시에만 서버에 전송
@@ -63,17 +95,21 @@ const ColorLogEditor = () => {
             "year":year
         };
         httpSend(options.api, options.method, req).then((res) => {
-            if (Object.keys(res).length !== 0) {
-                if (res.id !== -1) {
-                    setRValue(res.colorR * rangeExtentRatio);
-                    setGValue(res.colorG * rangeExtentRatio);
-                    setBValue(res.colorB * rangeExtentRatio);
-                    setId(res.id);
+            if (res.error == null) {    // 응답이 에러가 아니면
+                if (res.data.length > 0) {
+                    const colorData = res.data[0];
+                    if (colorData.id !== -1) {
+                        setRValue(colorData.colorR * rangeExtentRatio);
+                        setGValue(colorData.colorG * rangeExtentRatio);
+                        setBValue(colorData.colorB * rangeExtentRatio);
+                        setId(colorData.id);
     
-                    setMemo(res.text);
-                    setBtnStatus("saveBtn inactiveBtn");
+                        setMemo(colorData.text);
+                        setBtnStatus("saveBtn inactiveBtn");
+                    }
                 }
-            } else {
+            }
+            else {
                 console.log("failed to save data");
             }
         });
@@ -81,6 +117,16 @@ const ColorLogEditor = () => {
 
     return (
         <div className="page">
+            <div className="colorlog-nav-left">
+                <Icon icon="bi:arrow-left-circle-fill" onClick={moveToPrevDate} />
+            </div>
+            <div className="colorlog-nav-right">
+                <Icon icon="bi:arrow-right-circle-fill" onClick={moveToNextDate} />
+            </div>
+            <div className="colorlog-nav-home">
+                <Icon icon="mdi:calendar-month" onClick={moveToHome}/>
+            </div>
+
             <div className="colorlog">
                 <div className="title">{year} - {month} - {day}</div>
                 <ColorDisplayer r={RValue} g={GValue} b={BValue}/>

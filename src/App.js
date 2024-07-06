@@ -10,7 +10,7 @@ function App() {
     <div className='app'>
       <Routes>
         <Route path="/" element={<Calender />} />
-        <Route path="/:year/:month/:day" element={<ColorLogEditor />} />
+        <Route path="/:year/:month/:day" element={<ColorLogEditor/>} />
       </Routes>
     </div>
   );

@@ -1,8 +1,6 @@
 import {API_BASE_URL} from "./apiConfig.js";
 
 async function httpSend(api, method, request) {
-    let defaultObj = {};
-
     let options = {
         "method" : method,
         "headers" : {"Content-Type" : "application/json"},
@@ -18,11 +16,7 @@ async function httpSend(api, method, request) {
     }
     const resData = await response.json();
 
-    if (resData.error == null) {
-        const colorLogData = resData.data[0];
-        return colorLogData;
-    }
-    return defaultObj;
+    return resData;
 }
 
 export {httpSend};

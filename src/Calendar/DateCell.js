@@ -1,57 +1,20 @@
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays } from 'date-fns';
 import { format } from 'date-fns';
+import { useRef, useState, useEffect } from 'react';
 
-const DateCell = ({currentMonth, selectedDate, onDateClick}) => {
-    const monthStart = startOfMonth(currentMonth);
-    const monthEnd = endOfMonth(monthStart);
-    const startDate = startOfWeek(monthStart);
-    const endDate = endOfWeek(monthEnd);
-
-    const rows = [];
-    let days = [];
-    let day = startDate;
-    let formattedDate = '';
-
-    while (day <= endDate) {
-        for(let i=0;i<7;i++) {
-            formattedDate = format(day, 'd');
-            const constDay = day;
-            days.push(
-                <div
-                    className={`col cell ${
-                        !isSameMonth(day, monthStart)
-                        ? 'disabled'
-                        : isSameDay(day, selectedDate)
-                        ? 'selected'
-                        : format(currentMonth, 'M') !== format(day, 'M')
-                        ? 'not-valid'
-                        : 'valid'
-                    }`}
-                    key={day}
-                    onClick={() => onDateClick(constDay)}
-                >
-                    <span
-                        className={
-                            format(currentMonth, 'M') !== format(day, 'M')
-                                ? 'text not-valid'
-                                : ''
-                        }
-                    >
-                        {formattedDate}
-                    </span>
-                </div>
-            );
-            day = addDays(day, 1);
-        }
-        rows.push(
-            <div className="row" key={day}>
-                {days}
-            </div>,
-        );
-        days = [];
+const DateCell = ({isDateOfCurrentMonth, width, height, color}) => {
+    const styleTemplate = {
+        width:0, height:0, 
+        borderBottom:`${height}px solid ${color}`,
+        borderTop:`${height}px solid transparent`,
+        borderLeft:`${width}px solid transparent`,
+        borderRight:`${width}px solid ${color}`
     }
-    return <div className="body">{rows}</div>;
+    return (
+        <div className='colorlog-color' style={ isDateOfCurrentMonth && color != "" ? styleTemplate : {}}>
+        </div>
+    );
 }
 
 export default DateCell;
