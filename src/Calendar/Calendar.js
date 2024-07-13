@@ -27,6 +27,9 @@ const Calender = () => {
         const day = date.getDate(); // Get the day of the month (1-31)
         navigate(`/${year}/${month}/${day}`, {state : date});
     }
+    const showGallery = () => {
+        navigate(`/gallery`, {});
+    }
 
     useEffect(() => {
         if (state != undefined) 
@@ -46,6 +49,7 @@ const Calender = () => {
                 selectedDate={selectedDate}
                 onDateClick={showTargetDate}
             />
+            <div className='gallery-btn' onClick={showGallery}>갤러리 보기</div>
         </div>
     );
 };

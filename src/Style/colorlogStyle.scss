@@ -142,3 +142,113 @@ input[type=range] {
 	background: transparent;
     outline: auto;
 }
+
+/* styles.css */
+
+/* Container that holds both .summary-nav and .summary */
+.summary-page {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+
+    .header {
+        display: grid;
+        grid-template-columns: 2fr 6fr 2fr;
+        
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+
+        .colorlog-nav-home {
+            @include common.flex-row(flex-start, center);
+            padding-left : 2em;
+            svg {
+                @include common.size(5em, fit-content);
+                color: transparentize(rgb(255, 163, 179), 0.2);
+                &:hover {
+                    @include common.hover-event();
+                    transform: scale(1.15);
+                    color: theme.$dark-gray-color;
+                }
+            }
+        }
+    
+        .title {
+            padding: 2em;
+            text-align: center;
+            font-size: 30px;
+            color: rgb(37, 37, 37);
+        }
+        
+    }
+
+    .summary {
+        width: 100%;
+        margin-top: 10%;
+        overflow-y: auto;
+        padding-top: 3%; /* Space between the navbar and content */
+        box-shadow: 3px -5px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .row-wrapper {
+        margin: 0 auto;     // 가운데 정렬
+        display: flex;
+        justify-content: center;
+        width: 90%;
+    }
+
+    .row {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 1em;
+    }
+
+    .col.cell {
+        flex: 1;
+        min-width: 11%;
+        height: 10em;
+        margin: 5px;
+        padding: 7px;
+        text-align: center;
+        box-sizing: border-box;
+        position: relative;
+
+        .info {
+            position: absolute;  // Position the .info element absolutely within .col.cell
+            display: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding : 10px;
+            font-weight: 700;
+        }
+
+        &:hover {
+            // @include common.hover-event();
+            transform: scale(1.02);
+            .info {
+                display: block;
+                background-color: rgb(39, 39, 39, 0.5);
+                color: white;
+                transform: scale(1.01);
+            }
+        }
+    }
+
+    .loading-icon {
+        text-align: center;
+        width:100%;
+        height: 10em;
+        padding: 10px;
+        box-sizing: border-box;
+        padding-bottom: 10%;
+        svg {
+            @include common.size(5em, fit-content);
+            color: transparentize(rgb(255, 169, 183), 0.2);
+        }
+    }
+}

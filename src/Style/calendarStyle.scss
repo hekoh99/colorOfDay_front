@@ -57,7 +57,7 @@ html, body, #root, .app {
         }
     }
     .body {
-        @include common.size(100%, 89%);
+        @include common.size(100%, 92%);
         @include common.flex-column();
         .row {
             @include common.size(100%, 100%);
@@ -115,6 +115,25 @@ html, body, #root, .app {
                     bottom : 0;
                 }
             }
+        }
+    }
+
+    .gallery-btn {
+        @include common.flex-row(center, center);
+
+        margin-top: 1.5em;
+        border-radius: 10px;
+        text-align: center;
+        width: 9em;
+        height: 4em;
+        font-weight: 600;
+        color : white;
+        text-shadow: -1px 0px #d6a291, 0px 1px #d6a291, 1px 0px #d6a291, 0px -1px #d6a291;
+        background-color: theme.$sub-color;
+
+        &:hover {
+            @include common.hover-event();
+            transform: scale(1.1);
         }
     }
 }
