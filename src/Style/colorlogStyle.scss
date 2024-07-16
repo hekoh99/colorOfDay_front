@@ -162,8 +162,9 @@ input[type=range] {
         z-index: 1000;
 
         .colorlog-nav-home {
-            @include common.flex-row(flex-start, center);
-            padding-left : 2em;
+            // @include common.flex-row(flex-start, center);
+            padding-left : 12%;
+            padding-top : 12%;
             svg {
                 @include common.size(5em, fit-content);
                 color: transparentize(rgb(255, 163, 179), 0.2);
