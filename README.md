@@ -9,17 +9,13 @@
 - [How It Works](#how-it-works)
   - [Mood Factors](#mood-factors)
   - [RGB Mapping](#rgb-mapping)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
 The goal of this project is to provide a visual representation of your emotional journey over time. By translating your daily moods into colors, you can observe patterns and trends in how you feel throughout the days, weeks, and months.
 
 ## Demo
-<img src="https://github.com/user-attachments/assets/75fd7abb-4af0-4653-a264-da5658becff0">
+<video src="https://github.com/user-attachments/assets/75fd7abb-4af0-4653-a264-da5658becff0"> </video>
 
 ## How It Works
 
