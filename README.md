@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# Color of the Day
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Color of the Day** is a personal project that allows you to record and visualize your daily mood through colors. Each day, you can input your feelings across three dimensions: **Sense of Achievement**, **Sense of Stability**, and **Level of Fatigue**. These inputs are then mapped to the Red, Green, and Blue (RGB) color model, creating a unique color that represents your mood for that day.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Overview](#overview)
+- [Demo](#demo)
+- [How It Works](#how-it-works)
+  - [Mood Factors](#mood-factors)
+  - [RGB Mapping](#rgb-mapping)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The goal of this project is to provide a visual representation of your emotional journey over time. By translating your daily moods into colors, you can observe patterns and trends in how you feel throughout the days, weeks, and months.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Demo
+<img src="https://github.com/user-attachments/assets/75fd7abb-4af0-4653-a264-da5658becff0">
 
-### `npm test`
+## How It Works
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Mood Factors
 
-### `npm run build`
+Each day, you will rate the following three mood factors with range sliders:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Sense of Achievement**: How accomplished did you feel today?
+2. **Sense of Stability**: How secure and steady did you feel today?
+3. **Level of Fatigue**: How tired or drained did you feel today?
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### RGB Mapping
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The three mood factors are mapped to the RGB color model as follows:
 
-### `npm run eject`
+- **Sense of Achievement** (Red): This factor is mapped to the Red (R) value of the RGB color. A higher sense of achievement results in a stronger red component.
+- **Sense of Stability** (Green): This factor is mapped to the Green (G) value. A greater sense of stability results in a stronger green component.
+- **Level of Fatigue** (Blue): This factor is mapped to the Blue (B) value. A higher level of fatigue leads to a stronger blue component.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The RGB values are calculated using a simple linear mapping from the mood factors' input to the RGB range (0-255).
